@@ -68,7 +68,7 @@ app.get('/', (req, res) => {
     res.render('home')
 })
 
-// for every requst not defined above, we consider this a 404 error
+// for every requst not defined above, throw a 404 error
 app.all('*', (req, res, next) => {
     next(new ExpressError('Page Not Found', 404))
 })
