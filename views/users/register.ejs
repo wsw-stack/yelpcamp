@@ -1,4 +1,37 @@
 <% layout('layouts/boilerplate') %>
+    <div class="container d-flex justify-content-center align-items-center mt-5">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card shadow">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Tent_camping_along_the_Sulayr_trail_in_La_Taha%2C_Sierra_Nevada_National_Park_%28DSCF5147%29.jpg/640px-Tent_camping_along_the_Sulayr_trail_in_La_Taha%2C_Sierra_Nevada_National_Park_%28DSCF5147%29.jpg"
+                        alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="class-title">Register</h5>
+                        <form action="/register" method="POST" class="validated-form" novalidate>
+                            <div class="mb-3">
+                                <label class="form-label" for="imageUrl">Username</label>
+                                <input class="form-control" type="text" id="username" name="username" autofocus required>
+                                <div class="valid-feedback">Looks good!</div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="imageUrl">Email</label>
+                                <input class="form-control" type="email" id="email" name="email" required>
+                                <div class="valid-feedback">Looks good!</div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="email">Password</label>
+                                <input class="form-control" type="password" id="password" name="password" required>
+                                <div class="valid-feedback">Looks good!</div>
+                            </div>
+                            <button class="btn btn-success w-100">Register</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- <% layout('layouts/boilerplate') %>
 <h1>Register</h1>
 <form action="/register" method="POST" class="validated-form" novalidate>
     <div class="mb-3">
@@ -17,4 +50,4 @@
         <div class="valid-feedback">Looks good!</div>
     </div>
     <button class="btn btn-success">Register</button>
-</form>
+</form> -->

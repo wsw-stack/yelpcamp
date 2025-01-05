@@ -1,6 +1,7 @@
-if(process.env.NODE_ENV !== 'production') {
-    require('dotenv').config()
-}
+// if(process.env.NODE_ENV !== 'production') {
+//     require('dotenv').config()
+// }
+require('dotenv').config()
 
 const express = require('express')
 const app = express()
@@ -14,13 +15,15 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local')
 
 const ExpressError = require('./utils/ExpressError')
-const campgroundRoutes= require('./routes/campgrounds')
+const campgroundRoutes = require('./routes/campgrounds')
 const reviewRoutes= require('./routes/reviews')
 const userRoutes = require('./routes/users')
 const User = require('./models/user')
+const MongoStore = require('connect-mongo')
+const db_url = process.env.DB_URL
 
-
-mongoose.connect('mongodb://localhost:27017/yelp-camp')
+// const dbUrl = 'mongodb://localhost:27017/yelp-camp'
+mongoose.connect(db_url)
 .then(() => console.log('Connected!'))
 .catch(err => console.log('Connection failed ' + err))
 
@@ -32,7 +35,21 @@ app.use(express.urlencoded({extended: true}))
 app.use(methodOverride('_method'))
 app.use('/public', express.static(__dirname + '/public'))
 
+const store = MongoStore.create({
+    mongoUrl: db_url,
+    touchAfter: 24 * 60 * 60,
+    crypto: {
+        secret: 'thisshouldbeabettersecret!'
+    }
+});
+
+store.off("error", e => {
+    console.log("Session Store Error!", e)
+})
+
 const sessionConfig = {
+    store,
+    name: 'session',
     secret: 'this should be a better secret!',
     resave: false,
     saveUninitialized: true,
